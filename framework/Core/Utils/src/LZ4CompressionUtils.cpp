@@ -58,8 +58,9 @@ namespace ramses_internal
                 return true;
             }
 
-            auto readBytes = LZ4_decompress_fast(reinterpret_cast<const char*>(compressedBuffer),
+            auto readBytes = LZ4_decompress_safe(reinterpret_cast<const char*>(compressedBuffer),
                 reinterpret_cast<char*>(plainBuffer.data()),
+                compressedSize,
                 static_cast<int>(plainBuffer.size()));
 
             if (readBytes < static_cast<Int32>(compressedSize))
